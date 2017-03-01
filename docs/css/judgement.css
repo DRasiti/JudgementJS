@@ -1,0 +1,19 @@
+.j-error{
+	margin: 0;
+	padding: 0;
+	color: #ff0000;
+	display: block;
+}
+.j-error-highlight{
+	border-top: 1px dotted rgba(237, 18, 18, .5) !important;
+	border-right: 1px dotted rgba(237, 18, 18, .5) !important;
+	border-bottom: 2px solid #ED1212 !important;
+	border-left: 1px dotted rgba(237, 18, 18, .5) !important;
+}
+.j-success-highlight{
+	border-color: #0FDB4C;
+	border-top: 1px dotted rgba(15, 219, 76, .5) !important;
+	border-right: 1px dotted rgba(15, 219, 76, .5) !important;
+	border-bottom: 2px solid #0FDB4C !important;
+	border-left: 1px dotted rgba(15, 219, 76, .5) !important;
+}

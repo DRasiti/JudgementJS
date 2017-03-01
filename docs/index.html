@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>JudgementJS</title>
+		<meta charset="utf8">
+		<link href="https://fonts.googleapis.com/css?family=Yantramanav:100" rel="stylesheet"> 
+       	<link rel="stylesheet" type="text/css" href="./css/github.css" />
+       	<link rel="stylesheet" type="text/css" href="./css/style.css" />
+       	<link rel="stylesheet" type="text/css" href="./css/judgement.css" />
+	</head>
+
+	<body>
+		<div class="main-left-side cf">
+			<!-- LOGO -->
+			<div class="main-page-logo">
+				<img src="images/logo.png" alt="logo" />
+			</div>
+			
+			<!-- SIDE HOME -->
+			<div class="side-page" id="side-home">
+				<p class="go-to">Get started</p>
+				<div class="side-menu">
+					<ul>
+						<li><a class="scroller" href="#to-judgementjs">JudgementJS</a></li>
+						<li><a class="scroller" href="#to-installation">Installation</a></li>
+						<li><a class="scroller" href="#to-usage">Usage</a></li>
+						<li><a class="scroller" href="#to-exemple">Exemple</a></li>
+						<li><a class="scroller" href="#to-errors">Errors</a></li>
+						<li><a class="scroller" href="#to-styles">Errors/Inputs Styles</a></li>
+						<li><a class="scroller" href="#to-internationalization">Internationalization</a></li>
+					</ul>
+				</div>
+			</div>
+			
+			<!-- SIDE DEMO -->
+			<div class="side-page" id="side-demo">
+				<p class="go-to">Demo</p>
+				<div class="side-menu">
+					<ul>
+						<li><a class="scroller" href="#to-required">required</a></li>
+						<li><a class="scroller" href="#to-required_one_of">required_one_of</a></li>
+						<li><a class="scroller" href="#to-alpha">alpha</a></li>
+						<li><a class="scroller" href="#to-alpha-numeric">alpha_numeric</a></li>
+						<li><a class="scroller" href="#to-alpha-dash">alpha_dash</a></li>
+						<li><a class="scroller" href="#to-alpha-space">alpha_space</a></li>
+						<li><a class="scroller" href="#to-alpha-numeric-space">alpha_numeric_space</a></li>
+						<li><a class="scroller" href="#to-alpha-dash-space">alpha_dash_space</a></li>
+						<li><a class="scroller" href="#to-numeric">numeric</a></li>
+						<li><a class="scroller" href="#to-integer">integer</a></li>
+						<li><a class="scroller" href="#to-decimal">decimal</a></li>
+						<li><a class="scroller" href="#to-natural">natural</a></li>
+						<li><a class="scroller" href="#to-natural-no-zero">natural_no_zero</a></li>
+						<li><a class="scroller" href="#to-email">email</a></li>
+						<li><a class="scroller" href="#to-url">url</a></li>
+						<li><a class="scroller" href="#to-ip-address">ip_address</a></li>
+						<li><a class="scroller" href="#to-base64">base64</a></li>
+						<li><a class="scroller" href="#to-password">password</a></li>
+						<li><a class="scroller" href="#to-credit-card">credit_card</a></li>
+						<li><a class="scroller" href="#to-time">time</a></li>
+						<li><a class="scroller" href="#to-date">date</a></li>
+						<li><a class="scroller" href="#to-min-length">min_length</a></li>
+						<li><a class="scroller" href="#to-max-length">max_length</a></li>
+						<li><a class="scroller" href="#to-exact-length">exact_length</a></li>
+						<li><a class="scroller" href="#to-range-length">range_length</a></li>
+						<li><a class="scroller" href="#to-greater-than">greater_than</a></li>
+						<li><a class="scroller" href="#to-greater-than-equal-to">greater_than_equal_to</a></li>
+						<li><a class="scroller" href="#to-less-than">less_than</a></li>
+						<li><a class="scroller" href="#to-less-than-equal-to">less_than_equal_to</a></li>
+						<li><a class="scroller" href="#to-in-list">in_list</a></li>
+						<li><a class="scroller" href="#to-equal-to">equal_to</a></li>
+						<li><a class="scroller" href="#to-different-from">different_from</a></li>
+					</ul>
+				</div>
+			</div>
+			
+			<!-- SIDE OPTIONS & RULES -->
+			<div class="side-page" id="side-rules-options">
+				<p class="go-to">Options & Rules</p>
+				<div class="side-menu">
+					<ul>
+						<li><a class="scroller" href="#to-options">Options</a></li>
+						<li><a class="scroller" href="#to-callback-functions">Callback functions</a></li>
+						<li><a class="scroller" href="#to-rules">Rules</a></li>
+					</ul>
+				</div>
+			</div>
+			
+			<!-- SIDE FOOTER -->
+			<footer>
+				Copyright © 2017 - Dzulistan Rasiti
+			</footer>
+		</div>
+		<div class="main-right-side">
+			<header class="main-page-header cf">
+				<div class="paypal-donate-button">
+					<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+					<input type="hidden" name="cmd" value="_s-xclick">
+					<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+					">
+					<input type="image" src="https://image.noelshack.com/fichiers/2017/08/1487759553-paypal-donate-button.png" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
+					<img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+					</form>
+					<p></p>
+				</div>
+				<div class="main-page-menu">
+					<ul class="main-menu">
+						<li><a id="btn-home" href="#p-home" class="menu-btns" data-page="home">Get started</a></li>
+						<li><a id="btn-demo" href="#p-demo" class="menu-btns" data-page="demo">Demo</a></li>
+						<li><a id="btn-rules-options" href="#p-rules-options" class="menu-btns" data-page="rules-options">Options & Rules</a></li>
+					</ul>
+				</div>
+			</header>
+			
+			<div class="main-container">
+				<!-- HOME -->
+				<div class="page" id="home">
+					<h2 id="to-judgementjs">JudgementJS</h2>
+					
+					<p>JudgementJS is a small vanilla JavaScipt plugin that will accelerate your development of form validation on the client side. Inspired by the "Form_Validation" class of the PHP <a href="https://www.codeigniter.com/" target="_blank">CodeIgniter</a> framework, JudgementJS is based on a system of validation rules that you define for your fields of your form which requires validation.</p>
+					<p>JudgementJS has been designed to allow developers to write as little code as possible and thus increase productivity. If the javascipt is not your cup of tea or you do not want to get yourself into a tedious development, JudgementJS is for you.</p>
+					<p>You also have the ability to internationalize and customize the error messages of your forms using the JSON language files.</p>
+					<p>All this and much more can be achieved in just a few lines of code. TRY IT!</p>
+					
+					<h2 id="to-installation">Installation</h2>
+					
+					<h4>Standalone</h4>
+					<p><a href="#">Download latest release</a></p>
+					<p>Include the plugin file into your page.</p>
+					<pre><code class="html">&lt;script src="judgement.min.js">&lt;/script></code></pre>
+					
+					<h4>npm</h4>
+					<p>In your terminal run</p>
+					<pre><code class="sh">npm install judgementjs</code></pre>
+					<p>Use in node projects</p>
+					<pre><code class="js">var judgement = required('judgementjs');</code></pre>
+					
+					<h4>Bower</h4>
+					<p>In your terminal run</p>
+					<pre><code class="sh">bower install judgementjs</code></pre>
+					<p>Include the plugin into your page</p>
+					<pre><code class="js">&lt;script src="bower_components/judgementjs/dist/judgement.min.js">&lt;/script></code></pre>
+					
+					<h4>Meteor</h4>
+					<p>In your terminal run</p>
+					<pre><code class="sh">meteor add drasiti:judgementjs</code></pre>
+					
+					<h2 id="to-usage">Usage</h2>
+					<p>To use "judgementJs" follow the steps below.</p>
+					<ol>
+						<li>Create a form.</li>
+						<li>Add some inputs with <code class="inline">id</code>, <code class="inline">data-rules</code> and <code class="inline">data-label-name</code> attributs.
+							<ul>
+								<li><code class="inline">data-rules</code> attribute must contain the validation rules separated by pipes | (<a href="#p-rules-options" class="menu-btns" data-page="rules-options">list of rules</a>).</li>
+								<li><code class="inline">data-label-name</code> attribute must contain the name of the input label. The lable name is used in the error messages.</li>
+							</ul>
+						</li>
+						<li>Add a submit button with an <code class="inline">id</code> attribute. (The button can be any valid html tag, but in general it is the <code class="inline">&lt;input></code>, <code class="inline">&lt;button></code> or <code class="inline">&lt;a></code> tag).</li>
+						<li>Write some lines of JavaScript.</li>
+					</ol>
+					
+					<h4>HTML</h4>
+					<pre><code class="html">&lt;form id="my-form">
+	&lt;label>My input&lt;/label>
+	&lt;input type="text" id="my-input" data-rules="required|alpha_numeric|min_length[5]" data-label-name="My input" />
+	
+	&lt;a id="my-submit-button">My button&lt;/a>
+&lt;/form></code></pre>
+					<h4>JS</h4>
+					<pre><code class="js">var options = {
+	formId : 'my-form',
+	submitButtonId : 'my-submit-button'
+};
+var myForm = new Judgement(options);
+myForm.startJudgement();</code></pre>
+					<p>That's all. Now your form is checked in real time.</p>
+					<p>The <code class="inline">formId</code> and <code class="inline">submitButtonId</code> options are required, and you can choose several other options. For instance, you can prevent/allow submitting form with Enter key with <code class="inline">preventEnterKey</code> option, enable/disable the input highlights (red/green borders) with <code class="inline">inputHighlights</code> option or enable/disable the test mode with <code class="inline">testMode</code> option to never submit the from.</p>
+					<h4>JS</h4>
+					<pre><code class="js">var options = {
+	formId : 'my-form',
+	submitButtonId : 'my-submit-button',
+	onBlurChecking : true,
+	preventEnterKey: true,
+	inputHighlights: false,
+	testMode: true
+};
+var myForm = new Judgement(options);
+myForm.startJudgement();</code></pre>
+					<p>Easy !</p>
+					<p>For more options please check the <a href="#p-rules-options" class="menu-btns" data-page="rules-options">list of options</a></p>
+					
+					<h2 id="to-exemple">Example</h2>
+					<div id="example-form-error-container"></div>
+					<div class="rules-cards">
+						<form id="example-form">
+							<label>Name</label>
+							<input type="text" id="example-name" data-rules="required|alpha_dash_space" data-label-name="Name" />
+							<label>Email</label>
+							<input type="text" id="example-email" data-rules="required|email" data-label-name="Email" />
+							<label>Confirm email</label>
+							<input type="text" id="example-confirm-email" data-rules="equal_to[example-email,Email]" data-label-name="Confirm Email" />
+							<label>Birth date</label>
+							<input type="text" id="example-date" data-rules="required|date[ddmmyyyy,.]" data-label-name="Birth date" />
+							<label>Favorit pet</label>
+							<select id="example-pet" data-rules="required" data-label-name="Favorit pet">
+								<option value="">Choose a pet</option>
+								<option value="1">Dog</option>
+								<option value="2">Cat</option>
+								<option value="3">Fish</option>
+							</select>
+							<label>Terms of Service</label>
+							<input type="checkbox" id="example-tos" data-rules="required" data-label-name="Terms of Service" /> I agree to the Company <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a> <br/><br/>
+							<a id="example-submit-button" class="btn">Judge</a>
+						</form>
+						
+						<h4>Html</h4>
+						<pre><code class="html">&lt;form id="example-form">
+	&lt;label>Name&lt;/label>
+	&lt;input type="text" id="example-name" data-rules="required|alpha_dash_space" data-label-name="Name" />
+	
+	&lt;label>Email&lt;/label>
+	&lt;input type="text" id="example-email" data-rules="required|email" data-label-name="Email" />
+	
+	&lt;label>Confirm email&lt;/label>
+	&lt;input type="text" id="example-confirm-email" data-rules="equal_to[example-email,Email]" data-label-name="Confirm Email" />
+	
+	&lt;label>Birth date&lt;/label>
+	&lt;input type="text" id="example-date" data-rules="required|date[ddmmyyyy,.]" data-label-name="Birth date" />
+	
+	&lt;label>Terms of Service&lt;/label>
+	&lt;input type="checkbox" id="example-tos" data-rules="required" data-label-name="Terms of Service" /> I agree to the Company &lt;a href="#">Terms of Service&lt;/a> and &lt;a href="#">Privacy Policy&lt;/a> &lt;br/>&lt;br/>
+	
+	&lt;a id="example-submit-button" class="btn">Judge&lt;/a>
+&lt;/form></code></pre>
+						
+						<h4>JS</h4>
+						<pre><code class="js">var options = {
+	formId : 'example-form',
+	submitButtonId : 'example-submit-button',
+	onBlurChecking : true,
+	onSubmit: function(form){
+		alert("SUCCESS !");
+	}
+};
+var exampleForm = new Judgement(options);
+exampleForm.startJudgement();</code></pre>
+					</div>
+					
+					<h2 id="to-errors">Errors</h2>
+					<p>JudgementJS offers several options for managing and displaying validation errors.</p>
+					<ol>
+						<li><b>Show errors individually over each erroneous field.</b>
+							<div class="li-div">
+								<p>For each error, a <code class="inline">span</code> element is created containing the error message and the error message is placed before the field.</p>
+								<p>The <code class="inline">span</code> looks like this.</p>
+								<pre><code class="html">&lt;span class="fv-error" id="fv-error-field-id">Some error message&lt;/span></code></pre>
+								<p>The <b>fv-error</b> class allows you to apply a style to errors and the id is used by the plugin for error handling.</p>
+								<p>Individual errors are triggered by <code class="inline">realTimeChecking</code> and <code class="inline">onBlurChecking</code> options.</p>
+							</div>
+						</li>
+						<li><b>Display all errors in a container.</b>
+							<div class="li-div">
+								<p>The <code class="inline">errorContainer</code> option allows you to display errors in one place on the page. To do this, just give it the id of a container that is on the page. E.g.</p>
+								<pre><code class="js">var options = {
+	...
+	errorContainer : 'my-error-container-id'
+}
+var form = new Judgement(options);
+form.startJudgement();</code></pre>
+								<p>The form checking starts when the submit button is clicked.</p>
+							</div>
+						</li>
+						<li><b>Manually manage the error displaying.</b>
+							<div class="li-div">
+								<p>If the above two methods are not suitable for you, it is possible to manage the error display manually with the <code class="inline">onError</code> and <code class="inline">onSuccess</code>. E.g.</p>
+								<pre><code class="js">var options = {
+	...
+	onError : function(errorsFields) {
+		console.log(errorsFields);
+		
+		// your custom code to display errors.
+	},
+	onSuccess : function(successesFields, errorsFields){
+		console.log(successesFields);
+		
+		// your custom code to display successes and hide some error messages.
+	}
+}
+var form = new Judgement(options);
+form.startJudgement();</code></pre>
+								<p>The form checking starts when the submit button is clicked.</p>
+								<p>In addition to error handling, you must also manually manage the highlighting of fields.</p>
+							</div>
+						</li>
+					</ol>
+					
+					<h2 id="to-styles">Errors / Inputs Styles</h2>
+					<p>Only three classes are required to style your error messages and input highlights</p>
+					<ol>
+						<li>Error messages <code class="inline">.j-error</code>
+							<div class="li-div">
+								<pre><code class="css">.j-error{
+	margin: 0;
+	padding: 0;
+	color: #ff0000;
+	display: block;
+}</code></pre>
+							</div>
+						</li>
+						<li>Error highlight <code class="inline">.j-error-highlight</code>
+							<div class="li-div">
+								<pre><code class="css">.j-error-highlight{
+	border-top: 1px dotted rgba(237, 18, 18, .5) !important;
+	border-right: 1px dotted rgba(237, 18, 18, .5) !important;
+	border-bottom: 2px solid #ED1212 !important;
+	border-left: 1px dotted rgba(237, 18, 18, .5) !important;
+}</code></pre>
+							</div>
+						</li>
+						<li>Success highlight <code class="inline">.j-success-highlight</code>
+							<div class="li-div">
+								<pre><code class="css">.j-success-highlight{
+	border-color: #0FDB4C;
+	border-top: 1px dotted rgba(15, 219, 76, .5) !important;
+	border-right: 1px dotted rgba(15, 219, 76, .5) !important;
+	border-bottom: 2px solid #0FDB4C !important;
+	border-left: 1px dotted rgba(15, 219, 76, .5) !important;
+}</code></pre>
+							</div>
+						</li>
+					</ol>
+					<p class="important"><code class="inline">!important</code> tag is used to override the defaul input style.</p>
+					
+					<h2 id="to-internationalization">Internationalization</h2>
+					<p>The <code class="inline">jsonLangFile</code> option allows you to load a language file containing the error messages.</p>
+					<p class="important">Please note that <code class="inline">jsonLangFile</code> option will work with server environment only. Offline testing on your local PC won't work. You must install MAMP or AMPPS or something similar to test locally. This only applies if the <code class="inline">jsonLangFile</code> option is set, otherwise you don't need a server environment to test the plugin.</p>
+					
+					<pre><code class="js">var options = {
+	formId : 'lang-form',
+	submitButtonId : 'lang-submit-button',
+	onBlurChecking : true,
+	jsonLangFile : 'js/langs/fr.json'
+};
+var langForm = new Judgement(options);
+langForm.startJudgement();</code></pre>
+					<p>The following form displays now the error messages in french.</p>
+					
+					<div class="rules-cards" style="padding-top: 0;">
+						<form id="lang-form">
+							<label>Name</label>
+							<input type="text" id="lang-name" data-rules="required|alpha_dash_space" data-label-name="Name" />
+							<label>Email</label>
+							<input type="text" id="lang-email" data-rules="required|email" data-label-name="Email" />
+							
+							<a id="lang-submit-button" class="btn">Judge</a>
+						</form>
+					</div>
+					
+					<h4>The Json file</h4>
+					<p>That file contains error messages that the plugin displays for each rule. E.g.</p>
+					<pre><code class="json">{
+	...
+	"range_length" : "{field} requires between {min} and {max} characters"
+	...
+}</code></pre>
+					<p class="important">The messages contains different tags that you must keep and don't change their names. E.g. If you need the <code class="inline">range_rule</code> you will write <code class="inline">range_rule[5,10]</code> so the <code class="inline">{min}</code> will be replaced by 5 ant the <code class="inline">{max}</code> will be replaced by 10. The tag <code class="inline">{field}</code> will be replaced by the value of the <code class="inline">data-label-name</code> attribute.</p>
+					<p>JudgementJS comes with two language files <code class="inline">en.json</code> and <code class="inline">fr.json</code>. If you not set the <code class="inline">jsonLangFile</code> the default language is used (English).</p>
+					<p></p>
+				</div>
+				
+				<!-- DEMO -->
+				<div class="page" id="demo">
+					<div class="rules-cards">
+						<h3 id="to-required">required</h3>
+						<p>Checks if a value is provided.</p>
+						<form id="required-form">
+							<label>Required</label>
+							<input type="text" id="required" data-rules="required" data-label-name="Required" />
+							<a id="required-submit-button" class="btn">Valid</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="anyId" data-rules="required" data-label-name="Required" /></code></pre>
+					</div>
+					
+					<div class="rules-cards">
+						<h3 id="to-required_one_of">required_one_of</h3>
+						<p>Check if at least one checkbox or radio button is checked in a group.</p>
+						<form id="required_one_of-form">
+							<label>Required one of</label>
+							<input type="checkbox" id="car1" name="cars" data-rules="required_one_of" data-label-name="Required one of" /> Bentley
+							<input type="checkbox" id="car2" name="cars" data-rules="required_one_of" /> Mercedes-Benz 
+							<input type="checkbox" id="car3" name="cars" data-rules="required_one_of" /> Porsche
+							<input type="checkbox" id="car4" name="cars" data-rules="required_one_of" /> BMW <br/><br/>
+							<a id="required_one_of-submit-button" class="btn">Valid</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="car1" name="cars" data-rules="required_one_of" data-label-name="Required one of" />Bentley
+&lt;input type="text" id="car2" name="cars" data-rules="required_one_of" />Mercedes-Benz
+&lt;input type="text" id="car3" name="cars" data-rules="required_one_of" />Porsche
+&lt;input type="text" id="car4" name="cars" data-rules="required_one_of" />BMW</code></pre>
+					</div>
+					
+					<div class="rules-cards">
+						<h3 id="to-alpha">alpha</h3>
+						<p>Checks if is alphabetic characters only.</p>
+						<form id="alpha-form">
+							<label>Alpha</label>
+							<input type="text" id="alpha" data-rules="alpha" data-label-name="Alpha" />
+							<a id="alpha-submit-button" class="btn">Judge</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="anyId" data-rules="alpha" data-label-name="Alpha" /></code></pre>
+					</div>
+					
+					<div class="rules-cards">
+						<h3 id="to-alpha-numeric">alpha_numeric</h3>
+						<p>Checks if is alphabetic and numeric characters only.</p>
+						<form id="alpha_numeric-form">
+							<label>Alpha Numeric</label>
+							<input type="text" id="alpha_numeric" data-rules="alpha_numeric" data-label-name="Alpha Numeric" />
+							<a id="alpha_numeric-submit-button" class="btn">Judge</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="anyId" data-rules="alpha_numeric" data-label-name="Alpha Numeric" /></code></pre>
+					</div>
+					
+					<div class="rules-cards">
+						<h3 id="to-alpha-dash">alpha_dash</h3>
+						<p>Checks if is alphabetic, numeric, underscores and dashes characters only.</p>
+						<form id="alpha_dash-form">
+							<label>Alpha Dash</label>
+							<input type="text" id="alpha_dash" data-rules="alpha_dash" data-label-name="Alpha Dash" />
+							<a id="alpha_dash-submit-button" class="btn">Judge</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="anyId" data-rules="alpha_dash" data-label-name="Alpha Dash" /></code></pre>
+					</div>
+					
+					<div class="rules-cards">
+						<h3 id="to-alpha-space">alpha_space</h3>
+						<p>Checks if is alphabetic characters and spaces only.</p>
+						<form id="alpha_space-form">
+							<label>Alpha Space</label>
+							<input type="text" id="alpha_space" data-rules="alpha_space" data-label-name="Alpha Space" />
+							<a id="alpha_space-submit-button" class="btn">Judge</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="anyId" data-rules="alpha_space" data-label-name="Alpha Space" /></code></pre>
+					</div>
+					
+					<div class="rules-cards">
+						<h3 id="to-alpha-numeric-space">alpha_numeric_space</h3>
+						<p>Checks if is alphabetic, numeric and spaces characters only.</p>
+						<form id="alpha_numeric_space-form">
+							<label>Alpha Numeric Spaces</label>
+							<input type="text" id="alpha_numeric_space" data-rules="alpha_numeric_space" data-label-name="Alpha Numeric Space" />
+							<a id="alpha_numeric_space-submit-button" class="btn">Judge</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="anyId" data-rules="alpha_numeric_space" data-label-name="Alpha Numeric Space" /></code></pre>
+					</div>
+					
+					<div class="rules-cards">
+						<h3 id="to-alpha-dash-space">alpha_dash_space</h3>
+						<p>Checks if is alphabetic, numeric, underscores, dashes and spaces characters only.</p>
+						<form id="alpha_dash_space-form">
+							<label>Alpha Dash Space</label>
+							<input type="text" id="alpha_dash_space" data-rules="alpha_dash_space" data-label-name="Alpha Dash Space" />
+							<a id="alpha_dash_space-submit-button" class="btn">Judge</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="anyId" data-rules="alpha_dash_space" data-label-name="Alpha Dash Space" /></code></pre>
+					</div>
+					
+					<div class="rules-cards">
+						<h3 id="to-numeric">numeric</h3>
+						<p>Checks if is numeric characters only.</p>
+						<form id="numeric-form">
+							<label>Numeric</label>
+							<input type="text" id="numeric" data-rules="numeric" data-label-name="Numeric" />
+							<a id="numeric-submit-button" class="btn">Judge</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="anyId" data-rules="numeric" data-label-name="Numeric" /></code></pre>
+					</div>
+					
+					<div class="rules-cards">
+						<h3 id="to-integer">integer</h3>
+						<p>Checks if is integer only. (Positive or negative)</p>
+						<form id="integer-form">
+							<label>Integer</label>
+							<input type="text" id="integer" data-rules="integer" data-label-name="Integer" />
+							<a id="integer-submit-button" class="btn">Judge</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="anyId" data-rules="integer" data-label-name="Integer" /></code></pre>
+					</div>
+					
+					<div class="rules-cards">
+						<h3 id="to-decimal">decimal</h3>
+						<p>Checks if is decimal only. (Positive or negative)</p>
+						<form id="decimal-form">
+							<label>Decimal</label>
+							<input type="text" id="decimal" data-rules="decimal" data-label-name="Decimal" />
+							<a id="decimal-submit-button" class="btn">Judge</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="anyId" data-rules="decimal" data-label-name="Decimal" /></code></pre>
+					</div>
+					
+					<div class="rules-cards">
+						<h3 id="to-natural">natural</h3>
+						<p>Checks if is natural numbers only. (Positive only)</p>
+						<form id="natural-form">
+							<label>Natural</label>
+							<input type="text" id="natural" data-rules="natural" data-label-name="Natural" />
+							<a id="natural-submit-button" class="btn">Judge</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="anyId" data-rules="natural" data-label-name="Natural" /></code></pre>
+					</div>
+					
+					<div class="rules-cards">
+						<h3 id="to-natural-no-zero">natural_no_zero</h3>
+						<p>Checks if is natural numbers only, without zero. (Positive only)</p>
+						<form id="natural_no_zero-form">
+							<label>Natural No Zero</label>
+							<input type="text" id="natural_no_zero" data-rules="natural_no_zero" data-label-name="Natural No Zero" />
+							<a id="natural_no_zero-submit-button" class="btn">Judge</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="anyId" data-rules="natural_no_zero" data-label-name="Natural No Zero" /></code></pre>
+					</div>
+					
+					<div class="rules-cards">
+						<h3 id="to-email">email</h3>
+						<p>Checks if is valid email address.</p>
+						<form id="email-form">
+							<label>Email</label>
+							<input type="text" id="email" data-rules="email" data-label-name="Email" />
+							<a id="email-submit-button" class="btn">Judge</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="anyId" data-rules="email" data-label-name="Email" /></code></pre>
+					</div>
+					
+					<div class="rules-cards">
+						<h3 id="to-url">url</h3>
+						<p>Checks if is valid url address.</p>
+						<form id="url-form">
+							<label>Url</label>
+							<input type="text" id="url" data-rules="url" data-label-name="Url" />
+							<a id="url-submit-button" class="btn">Judge</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="anyId" data-rules="url" data-label-name="Url" /></code></pre>
+					</div>
+					
+					<div class="rules-cards">
+						<h3 id="to-ip-address">ip_address</h3>
+						<p>Checks if is valid IP address.</p>
+						<form id="ip_address-form">
+							<label>IP Address</label>
+							<input type="text" id="ip_address" data-rules="ip_address" data-label-name="IP Address" />
+							<a id="ip_address-submit-button" class="btn">Judge</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="anyId" data-rules="ip_address" data-label-name="IP Address" /></code></pre>
+					</div>
+					
+					<div class="rules-cards">
+						<h3 id="to-base64">base64</h3>
+						<p>Checks if is base 64 characters only.</p>
+						<form id="base64-form">
+							<label>Base 64</label>
+							<input type="text" id="base64" data-rules="base64" data-label-name="Base 64" />
+							<a id="base64-submit-button" class="btn">Judge</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="anyId" data-rules="base64" data-label-name="Base 64" /></code></pre>
+					</div>
+					
+					<div class="rules-cards">
+						<h3 id="to-password">password</h3>
+						<p>Checks if is alphabetic, numeric and special (@,$,!,%,*,?,&) characters only. And 6 characters at least, 1 Uppercase character, 1 lowercase character and 1 numeric character.</p>
+						<form id="password-form">
+							<label>Password</label>
+							<input type="password" id="password" data-rules="password" data-label-name="Password" />
+							<a id="password-submit-button" class="btn">Judge</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="anyId" data-rules="password" data-label-name="Password" /></code></pre>
+					</div>
+					
+					<div class="rules-cards">
+						<h3 id="to-credit-card">credit_card</h3>
+						<p>Checks if is valid credit card number. For Visa, MasterCard, American Express, Diners Club, Discover or JCB cards.</p>
+						<form id="credit_card-form">
+							<label>Credit Card</label>
+							<input type="text" id="credit_card" data-rules="credit_card" data-label-name="Credit Card" />
+							<a id="credit_card-submit-button" class="btn">Judge</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="anyId" data-rules="credit_card" data-label-name="Credit Card" /></code></pre>
+					</div>
+					
+					<div class="rules-cards">
+						<h3 id="to-time">time</h3>
+						<p>Checks if is valid time value. (hh:mm:ss)</p>
+						<form id="time-form">
+							<label>Time</label>
+							<input type="text" id="time" data-rules="time" data-label-name="Time" />
+							<a id="time-submit-button" class="btn">Judge</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="anyId" data-rules="time" data-label-name="Time" /></code></pre>
+					</div>
+					
+					<div class="rules-cards">
+						<h3 id="to-date">date</h3>
+						<p>Check if is valid date for <i>n</i> format.</p>
+						<form id="date-form">
+							<label>Date</label>
+							<input type="text" id="date" data-rules="date[ddmmyyyy,.]" data-label-name="Date" />
+							<a id="date-submit-button" class="btn">Judge</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="anyId" data-rules="date[ddmmyyyy,.]" data-label-name="Date" /></code></pre>
+					</div>
+					
+					<div class="rules-cards">
+						<h3 id="to-min-length">min_length</h3>
+						<p>Check for a minimum length of <i>n</i> characters.</p>
+						<form id="min_length-form">
+							<label>Min Length</label>
+							<input type="text" id="min_length" data-rules="min_length[8]" data-label-name="Min Length" />
+							<a id="min_length-submit-button" class="btn">Judge</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="anyId" data-rules="min_length[8]" data-label-name="Min Length" /></code></pre>
+					</div>
+					
+					<div class="rules-cards">
+						<h3 id="to-max-length">max_length</h3>
+						<p>Check for a maximum length of <i>n</i> characters.</p>
+						<form id="max_length-form">
+							<label>Max Length</label>
+							<input type="text" id="max_length" data-rules="max_length[15]" data-label-name="Max Length" />
+							<a id="max_length-submit-button" class="btn">Judge</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="anyId" data-rules="max_length[15]" data-label-name="Max Length" /></code></pre>
+					</div>
+					
+					<div class="rules-cards">
+						<h3 id="to-exact-length">exact_length</h3>
+						<p>Check for a exact length of <i>n</i> characters.</p>
+						<form id="exact_length-form">
+							<label>Exact Length</label>
+							<input type="text" id="exact_length" data-rules="exact_length[4]" data-label-name="Exact Length" />
+							<a id="exact_length-submit-button" class="btn">Judge</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="anyId" data-rules="exact_length[4]" data-label-name="Exact Length" /></code></pre>
+					</div>
+					
+					<div class="rules-cards">
+						<h3 id="to-range-length">range_length</h3>
+						<p>Check for a minimum length of <i>x</i> and a maximum length of <i>y</i> characters.</p>
+						<form id="range_length-form">
+							<label>Range Length</label>
+							<input type="text" id="range_length" data-rules="range_length[5,10]" data-label-name="Range Length" />
+							<a id="range_length-submit-button" class="btn">Judge</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="anyId" data-rules="range_length[5,10]" data-label-name="Range Length" /></code></pre>
+					</div>
+					
+					<div class="rules-cards">
+						<h3 id="to-greater-than">greater_than</h3>
+						<p>Check if value is greater than <i>n</i> parameter.</p>
+						<form id="greater_than-form">
+							<label>Greater Than</label>
+							<input type="text" id="greater_than" data-rules="greater_than[100]" data-label-name="Greater Than" />
+							<a id="greater_than-submit-button" class="btn">Judge</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="anyId" data-rules="greater_than[100]" data-label-name="Greater Than" /></code></pre>
+					</div>
+					
+					<div class="rules-cards">
+						<h3 id="to-greater-than-equal-to">greater_than_equal_to</h3>
+						<p>Check if value is greater or equal than <i>n</i> parameter.</p>
+						<form id="greater_than_equal_to-form">
+							<label>Greater Than Equal To</label>
+							<input type="text" id="greater_than_equal_to" data-rules="greater_than_equal_to[25]" data-label-name="Greater Than Equal To" />
+							<a id="greater_than_equal_to-submit-button" class="btn">Judge</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="anyId" data-rules="greater_than_equal_to[25]" data-label-name="Greater Than Equal To" /></code></pre>
+					</div>
+					
+					<div class="rules-cards">
+						<h3 id="to-less-than">less_than</h3>
+						<p>Check if value is less than <i>n</i> parameter.</p>
+						<form id="less_than-form">
+							<label>Less Than</label>
+							<input type="text" id="less_than" data-rules="less_than[100]" data-label-name="Less Than" />
+							<a id="less_than-submit-button" class="btn">Judge</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="anyId" data-rules="less_than[100]" data-label-name="Less Than" /></code></pre>
+					</div>
+					
+					<div class="rules-cards">
+						<h3 id="to-less-than-equal-to">less_than_equal_to</h3>
+						<p>Check if value is less or equal than <i>n</i> parameter.</p>
+						<form id="less_than_equal_to-form">
+							<label>Less Than Equal To</label>
+							<input type="text" id="less_than_equal_to" data-rules="less_than_equal_to[25]" data-label-name="Less Than Equal To" />
+							<a id="less_than_equal_to-submit-button" class="btn">Judge</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="anyId" data-rules="less_than_equal_to[25]" data-label-name="Less Than Equal To" /></code></pre>
+					</div>
+					
+					<div class="rules-cards">
+						<h3 id="to-in-list">in_list</h3>
+						<p>Check if value is in the <i>n</i> list.</p>
+						<form id="in_list-form">
+							<label>In List</label>
+							<input type="text" id="in_list" data-rules="in_list[red,blue,green]" data-label-name="In List" />
+							<a id="in_list-submit-button" class="btn">Judge</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="anyId" data-rules="in_list[red,blue,green]" data-label-name="In List" /></code></pre>
+					</div>
+					
+					<div class="rules-cards">
+						<h3 id="to-equal-to">equal_to</h3>
+						<p>Check for equality between two values.</p>
+						<form id="equal_to-form">
+							<label>Password</label>
+							<input type="password" id="pass" />
+							<label>Confirm Password</label>
+							<input type="password" id="equal_to" data-rules="equal_to[pass,Password]" data-label-name="Confirm Password" />
+							<a id="equal_to-submit-button" class="btn">Judge</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="anyId" data-rules="equal_to[password,Password]" data-label-name="Confirm Password" /></code></pre>
+					</div>
+					
+					<div class="rules-cards">
+						<h3 id="to-different-from">different_from</h3>
+						<p>Check for inequality between two values.</p>
+						<form id="different_from-form">
+							<label>ID 1</label>
+							<input type="text" id="id-1" />
+							<label>ID 2</label>
+							<input type="text" id="different_from" data-rules="different_from[id-1,ID 1]" data-label-name="ID 2" />
+							<a id="different_from-submit-button" class="btn">Judge</a>
+						</form>
+						<h4>Html</h4>
+						<pre><code class="html">&lt;input type="text" id="anyId" data-rules="different_from[id-1,ID 1]" data-label-name="ID 2" /></code></pre>
+					</div>
+				</div>
+				
+				<!-- OPTIONS & RULES -->
+				<div class="page" id="rules-options">
+					<h2 id="to-options">Options</h2>
+					<table>
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Type</th>
+								<th>Default</th>
+								<th>Accepted</th>
+								<th>Desctiption</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>formId <span class="required">*</span></td>
+								<td>string</td>
+								<td>null</td>
+								<td>any string</td>
+								<td class="options">The id of the form which you want to check.</td>
+							</tr>
+							<tr>
+								<td>submitButtonId <span class="required">*</span></td>
+								<td>string</td>
+								<td>null</td>
+								<td>any string</td>
+								<td class="options">The id of the submit button of your form.</td>
+							</tr>
+							<tr>
+								<td>realTimeChecking&nbsp;<span class="warning">&#9888;</span></td>
+								<td>boolean</td>
+								<td>false</td>
+								<td>true or false</td>
+								<td class="options">Enables/Disables the real time field checking.</td>
+							</tr>
+							<tr>
+								<td>onBlurChecking&nbsp;<span class="warning">&#9888;</span></td>
+								<td>boolean</td>
+								<td>true</td>
+								<td>true or false</td>
+								<td class="options">Enables/Disables the on blur field checking.</td>
+							</tr>
+							<tr>
+								<td>errorContainer&nbsp;<span class="warning">&#9888;</span></td>
+								<td>string</td>
+								<td>null</td>
+								<td>any string</td>
+								<td class="options">The id of the DOM element where you want display the form errors.</td>
+							</tr>
+							<tr>
+								<td>inputHighlights</td>
+								<td>boolean</td>
+								<td>true</td>
+								<td>true or false</td>
+								<td class="options">Enables/Disables the inputs highlights. If has error the input borders are red and if has success the input borders are green.</td>
+							</tr>
+							<tr>
+								<td>preventEnterKey</td>
+								<td>boolean</td>
+								<td>false</td>
+								<td>true or false</td>
+								<td class="options">If its set to true, prevents the form submission with the Enter key.</td>
+							</tr>
+							<tr>
+								<td>jsonLangFile</td>
+								<td>string</td>
+								<td>null</td>
+								<td>any valid path</td>
+								<td class="options">Allows you to load a JSON language file which contains the error messages of the form.</td>
+							</tr>
+							<tr>
+								<td>testMode</td>
+								<td>boolean</td>
+								<td>false</td>
+								<td>true or false</td>
+								<td class="options">Checks the form and prevent its submission with a submit button or Enter key.</td>
+							</tr>
+						</tbody>
+					</table>
+					<p class="note"><span class="required">*</span> required options.</p>
+					<p class="note"><span class="warning">&#9888;</span> <b>realTimeChecking</b>, <b>onBlurChecking</b> and <b>errorContainer</b> can not be used at the same time. You must to choose one of them.</p>
+					
+					<h2 id="to-callback-functions">Callback functions</h2>
+					<table>
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Type</th>
+								<th>Default</th>
+								<th>Accepted</th>
+								<th>Desctiption</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>onSubmit</td>
+								<td>function</td>
+								<td>null</td>
+								<td>Any valid function()</td>
+								<td>Runs when the form is correctly filled. Allows to manipulate and send form manually.</td>
+							</tr>
+							<tr>
+								<td>onSuccess</td>
+								<td>function</td>
+								<td>null</td>
+								<td>Any valid function()</td>
+								<td>Runs when the form has successes fields. Allows to manipulate successes fields manually.</td>
+							</tr>
+							<tr>
+								<td>onError</td>
+								<td>function</td>
+								<td>null</td>
+								<td>Any valid function()</td>
+								<td>Runs when the form has errors. Allows to manipulate errors manually.</td>
+							</tr>
+						</tbody>
+					</table>
+					<p class="note">
+						<b>Note:</b> The <b>onSubmit</b> callback function can manipulate the form through the callback parameter (e.g "form").<br/>
+						The <b>onError</b> callback function can manipulate the errors through the callback parameter (e.g. "errors").
+					</p>
+					
+					<h2 id="to-rules">Rules</h2>
+					<table>
+						<thead>
+							<tr>
+								<th>Rule</th>
+								<th>Parameter</th>
+								<th>Description</th>
+								<th>Example</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>required</td>
+								<td>No</td>
+								<td>Returns FALSE if the form element is empty.</td>
+								<td>-</td>
+							</tr>
+							<tr>
+								<td>required_one_of</td>
+								<td>No</td>
+								<td>Return FALSE as long as a checkbox or a radio button in a group is not checked.</td>
+								<td>-</td>
+							</tr>
+							<tr>
+								<td>alpha</td>
+								<td>No</td>
+								<td>Returns FALSE if the form element contains anything other than alphabetical characters.</td>
+								<td>-</td>
+							</tr>
+							<tr>
+								<td>alpha_numeric</td>
+								<td>No</td>
+								<td>Returns FALSE if the form element contains anything other than alpha-numeric characters.</td>
+								<td>-</td>
+							</tr>
+							<tr>
+								<td>alpha_dash</td>
+								<td>No</td>
+								<td>Returns FALSE if the form element contains anything other than alpha-numeric characters, underscores or dashes.</td>
+								<td>-</td>
+							</tr>
+							<tr>
+								<td>alpha_space</td>
+								<td>No</td>
+								<td>Returns FALSE if the form element contains anything other than alphabetical characters or spaces.</td>
+								<td>-</td>
+							</tr>
+							<tr>
+								<td>alpha_numeric_space</td>
+								<td>No</td>
+								<td>Returns FALSE if the form element contains anything other than alpha-numeric characters or spaces.</td>
+								<td>-</td>
+							</tr>
+							<tr>
+								<td>alpha_dash_space</td>
+								<td>No</td>
+								<td>Returns FALSE if the form element contains anything other than alpha-numeric characters, underscores, dashes or spaces.</td>
+								<td>-</td>
+							</tr>
+							<tr>
+								<td>numeric</td>
+								<td>No</td>
+								<td>Returns FALSE if the form element contains anything other than numeric characters.</td>
+								<td>-</td>
+							</tr>
+							<tr>
+								<td>integer</td>
+								<td>No</td>
+								<td>Returns FALSE if the form element contains anything other than an integer.</td>
+								<td>-</td>
+							</tr>
+							<tr>
+								<td>decimal</td>
+								<td>No</td>
+								<td>Returns FALSE if the form element contains anything other than a decimal number.</td>
+								<td>-</td>
+							</tr>
+							<tr>
+								<td>natural</td>
+								<td>No</td>
+								<td>Returns FALSE if the form element contains anything other than a natural number: 0, 1, 2, 3, etc.</td>
+								<td>-</td>
+							</tr>
+							<tr>
+								<td>natural_no_zero</td>
+								<td>No</td>
+								<td>Returns FALSE if the form element contains anything other than a natural number, but not zero: 1, 2, 3, etc.</td>
+								<td>-</td>
+							</tr>
+							<tr>
+								<td>email</td>
+								<td>No</td>
+								<td>Returns FALSE if the form element does not contain a valid email address.</td>
+								<td>-</td>
+							</tr>
+							<tr>
+								<td>url</td>
+								<td>No</td>
+								<td>Returns FALSE if the form element does not contain a valid URL.</td>
+								<td>-</td>
+							</tr>
+							<tr>
+								<td>ip_address</td>
+								<td>No</td>
+								<td>Returns FALSE if the supplied IP address is not valid. Accepts an optional parameter of ‘ipv4’ or ‘ipv6’ to specify an IP format.</td>
+								<td>-</td>
+							</tr>
+							<tr>
+								<td>base64</td>
+								<td>No</td>
+								<td>Returns FALSE if the supplied string contains anything other than valid Base64 characters.</td>
+								<td>-</td>
+							</tr>
+							<tr>
+								<td>password</td>
+								<td>No</td>
+								<td>Return FALSE if the supplied string contains anything other than minimum 6 characters at least 1 uppercase alphabet, 1 lowercase alphabet, 1 number and 1 special character ($,@,$,!,%,*,?,&)</td>
+								<td>-</td>
+							</tr>
+							<tr>
+								<td>credit_card</td>
+								<td>No</td>
+								<td>Returns FALSE if the form element does not contain a valid credit card number. Accepted cards: Visa, MasterCard, American Express, Diners Club, Discover and JCB.</td>
+								<td>-</td>
+							</tr>
+							<tr>
+								<td>time</td>
+								<td>No</td>
+								<td>Returns FALSE if the form element does not contain a valid time. Format: hh:mm:ss</td>
+								<td>-</td>
+							</tr>
+							<tr>
+								<td>date</td>
+								<td>Yes</td>
+								<td>
+									Returns FALSE if the form element does not contain a valid Date. Rule details :  date[format,separator]<br/>
+									Accepted formats : ddmmyyyy or yyyymmdd<br/>
+									Accepted separators : . or - or /
+								</td>
+								<td>date[ddmmyyyy,.]</td>
+							</tr>
+							<tr>
+								<td>min_length</td>
+								<td>Yes</td>
+								<td>Returns FALSE if the length of the form element value is shorter than the parameter value.</td>
+								<td>min_length[5]</td>
+							</tr>
+							<tr>
+								<td>max_length</td>
+								<td>Yes</td>
+								<td>Returns FALSE if the length of the form element value is longer than the parameter value.</td>
+								<td>max_length[10]</td>
+							</tr>
+							<tr>
+								<td>exact_length</td>
+								<td>Yes</td>
+								<td>Returns FALSE if the length of the form element value is not exactly the parameter value.</td>
+								<td>exact_length[3]</td>
+							</tr>
+							<tr>
+								<td>range_length</td>
+								<td>Yes</td>
+								<td>Returns FALSE if the length of the form element value is not between the parameter values.</td>
+								<td>range_length[5,10]</td>
+							</tr>
+							<tr>
+								<td>greater_than</td>
+								<td>Yes</td>
+								<td>Returns FALSE if the form element is less than or equal to the parameter value or not numeric.</td>
+								<td>greater_than[25]</td>
+							</tr>
+							<tr>
+								<td>greater_than_equal_to</td>
+								<td>Yes</td>
+								<td>Returns FALSE if the form element is less than the parameter value, or not numeric.</td>
+								<td>greater_than_equal_to[25]</td>
+							</tr>
+							<tr>
+								<td>less_than</td>
+								<td>Yes</td>
+								<td>Returns FALSE if the form element is greater than or equal to the parameter value or not numeric.</td>
+								<td>less_than[25]</td>
+							</tr>
+							<tr>
+								<td>less_than_equal_to</td>
+								<td>Yes</td>
+								<td>Returns FALSE if the form element is greater than the parameter value, or not numeric.</td>
+								<td>less_than_equal_to[25]</td>
+							</tr>
+							<tr>
+								<td>in_list</td>
+								<td>Yes</td>
+								<td>Returns FALSE if the form element is not within a predetermined list.</td>
+								<td>in_list[red,blue,green]</td>
+							</tr>
+							<tr>
+								<td>equal_to</td>
+								<td>Yes</td>
+								<td>Returns FALSE if the form element does not match the one in the parameter.</td>
+								<td>equal_to[field_id,field_label]</td>
+							</tr>
+							<tr>
+								<td>different_from</td>
+								<td>Yes</td>
+								<td>Returns FALSE if the form element does not differ from the one in the parameter.</td>
+								<td>different_from[fieldId,field_label]</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<script type="text/javascript" src="js/highlight.pack.js"></script>
+		<script type="text/javascript" src="js/judgement.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script type="text/javascript">
+			hljs.initHighlightingOnLoad();
+			
+			document.addEventListener("DOMContentLoaded", function() {
+				/* ALL FORMS */
+				var form1 = new Judgement({ formId : 'required-form', submitButtonId : 'required-submit-button', realTimeChecking: true, testMode : true });
+				form1.startJudgement();
+				
+				var form2 = new Judgement({ formId : 'required_one_of-form', submitButtonId : 'required_one_of-submit-button', realTimeChecking: true, testMode : true});
+				form2.startJudgement();
+				
+				var form3 = new Judgement({ formId : 'alpha-form', submitButtonId : 'alpha-submit-button', realTimeChecking: true, testMode : true });
+				form3.startJudgement();
+				
+				var form4 = new Judgement({ formId : 'alpha_numeric-form', submitButtonId : 'alpha_numeric-submit-button', realTimeChecking: true, testMode : true });
+				form4.startJudgement();
+				
+				var form5 = new Judgement({ formId : 'alpha_dash-form', submitButtonId : 'alpha_dash-submit-button', realTimeChecking: true, testMode : true });
+				form5.startJudgement();
+				
+				var form6 = new Judgement({ formId : 'alpha_space-form', submitButtonId : 'alpha_space-submit-button', realTimeChecking: true, testMode : true });
+				form6.startJudgement();
+				
+				var form7 = new Judgement({ formId : 'alpha_numeric_space-form', submitButtonId : 'alpha_numeric_space-submit-button', realTimeChecking: true, testMode : true });
+				form7.startJudgement();
+				
+				var form8 = new Judgement({ formId : 'alpha_dash_space-form', submitButtonId : 'alpha_dash_space-submit-button', realTimeChecking: true, testMode : true });
+				form8.startJudgement();
+				
+				var form9 = new Judgement({ formId : 'numeric-form', submitButtonId : 'numeric-submit-button', realTimeChecking: true, testMode : true });
+				form9.startJudgement();
+				
+				var form10 = new Judgement({ formId : 'integer-form', submitButtonId : 'integer-submit-button', realTimeChecking: true, testMode : true });
+				form10.startJudgement();
+				
+				var form11 = new Judgement({ formId : 'decimal-form', submitButtonId : 'decimal-submit-button', realTimeChecking: true, testMode : true });
+				form11.startJudgement();
+				
+				var form12 = new Judgement({ formId : 'natural-form', submitButtonId : 'natural-submit-button', realTimeChecking: true, testMode : true });
+				form12.startJudgement();
+				
+				var form13 = new Judgement({ formId : 'natural_no_zero-form', submitButtonId : 'natural_no_zero-submit-button', realTimeChecking: true, testMode : true });
+				form13.startJudgement();
+				
+				var form14 = new Judgement({ formId : 'email-form', submitButtonId : 'email-submit-button', realTimeChecking: true, testMode : true });
+				form14.startJudgement();
+				
+				var form15 = new Judgement({ formId : 'url-form', submitButtonId : 'url-submit-button', realTimeChecking: true, testMode : true });
+				form15.startJudgement();
+				
+				var form16 = new Judgement({ formId : 'ip_address-form', submitButtonId : 'ip_address-submit-button', realTimeChecking: true, testMode : true });
+				form16.startJudgement();
+				
+				var form17 = new Judgement({ formId : 'base64-form', submitButtonId : 'base64-submit-button', realTimeChecking: true, testMode : true });
+				form17.startJudgement();
+				
+				var form18 = new Judgement({ formId : 'password-form', submitButtonId : 'password-submit-button', realTimeChecking: true, testMode : true });
+				form18.startJudgement();
+				
+				var form19 = new Judgement({ formId : 'credit_card-form', submitButtonId : 'credit_card-submit-button', realTimeChecking: true, testMode : true });
+				form19.startJudgement();
+				
+				var form20 = new Judgement({ formId : 'time-form', submitButtonId : 'time-submit-button', realTimeChecking: true, testMode : true });
+				form20.startJudgement();
+				
+				var form21 = new Judgement({ formId : 'date-form', submitButtonId : 'date-submit-button', realTimeChecking: true, testMode : true });
+				form21.startJudgement();
+				
+				var form22 = new Judgement({ formId : 'min_length-form', submitButtonId : 'min_length-submit-button', realTimeChecking: true, testMode : true });
+				form22.startJudgement();
+				
+				var form23 = new Judgement({ formId : 'max_length-form', submitButtonId : 'max_length-submit-button', realTimeChecking: true, testMode : true });
+				form23.startJudgement();
+				
+				var form24 = new Judgement({ formId : 'exact_length-form', submitButtonId : 'exact_length-submit-button', realTimeChecking: true, testMode : true });
+				form24.startJudgement();
+				
+				var form25 = new Judgement({ formId : 'range_length-form', submitButtonId : 'range_length-submit-button', realTimeChecking: true, testMode : true });
+				form25.startJudgement();
+				
+				var form26 = new Judgement({ formId : 'greater_than-form', submitButtonId : 'greater_than-submit-button', realTimeChecking: true, testMode : true });
+				form26.startJudgement();
+				
+				var form27 = new Judgement({ formId : 'greater_than_equal_to-form', submitButtonId : 'greater_than_equal_to-submit-button', realTimeChecking: true, testMode : true });
+				form27.startJudgement();
+				
+				var form28 = new Judgement({ formId : 'less_than-form', submitButtonId : 'less_than-submit-button', realTimeChecking: true, testMode : true });
+				form28.startJudgement();
+				
+				var form29 = new Judgement({ formId : 'less_than_equal_to-form', submitButtonId : 'less_than_equal_to-submit-button', realTimeChecking: true, testMode : true });
+				form29.startJudgement();
+				
+				var form30 = new Judgement({ formId : 'in_list-form', submitButtonId : 'in_list-submit-button', realTimeChecking: true, testMode : true });
+				form30.startJudgement();
+				
+				var form31 = new Judgement({ formId : 'equal_to-form', submitButtonId : 'equal_to-submit-button', realTimeChecking: true, testMode : true });
+				form31.startJudgement();
+				
+				var form32 = new Judgement({ formId : 'different_from-form', submitButtonId : 'different_from-submit-button', realTimeChecking: true, testMode : true });
+				form32.startJudgement();
+				
+				// EXAMPLE FORM
+				var options = {
+					formId : 'example-form',
+					submitButtonId : 'example-submit-button',
+					onBlurChecking : true,
+					onSubmit: function(form){
+						alert("SUCCESS !");
+					}
+				};
+				var exampleForm = new Judgement(options);
+				exampleForm.startJudgement();
+				
+				// LANG FORM
+				var options = {
+					formId : 'lang-form',
+					submitButtonId : 'lang-submit-button',
+					onBlurChecking : true,
+					jsonLangFile : 'js/langs/fr.json',
+					onSubmit: function(form){
+						alert("SUCCESS !");
+					}
+				};
+				var langForm = new Judgement(options);
+				langForm.startJudgement();
+			});
+		</script>
+	</body>
+</html>
