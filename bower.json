@@ -1,0 +1,25 @@
+{
+  "name": "judgementjs",
+  "description": "JavaScript form validator. Allows to easily validate your forms just with adding some rules in your form elements through the data-rules attribute.",
+  "main": "judgement.min.js",
+  "authors": [
+    "Dzulistan Rasiti <rasiti.d@gmail.com>"
+  ],
+  "license": "(MIT)",
+  "keywords": [
+    "form",
+    "validation",
+    "form",
+    "validator",
+    "form",
+    "validation"
+  ],
+  "homepage": "https://github.com/DRasiti/JudgementJS#readme",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

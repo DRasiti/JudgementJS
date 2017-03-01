@@ -1,0 +1,30 @@
+{
+  "name": "judgementjs",
+  "version": "1.0.0",
+  "description": "JavaScript form validator. Allows to easily validate your forms just with adding some rules in your form elements through the data-rules attribute.",
+  "main": "judgement.min.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DRasiti/JudgementJS.git"
+  },
+  "keywords": [
+    "form",
+    "validation",
+    "form",
+    "validator",
+    "form",
+    "validation"
+  ],
+  "author": "Dzulistan Rasiti <rasiti.d@gmail.com>",
+  "license": "(MIT)",
+  "bugs": {
+    "url": "https://github.com/DRasiti/JudgementJS/issues"
+  },
+  "homepage": "https://github.com/DRasiti/JudgementJS#readme"
+}
