@@ -37,42 +37,6 @@
 			password 			: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{6,}$/,
 			credit_card 		: /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/,
 			time				: /^(?:0[0-9]|1[0-9]|2[0-3])(:)(?:0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9])(:)(?:0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9])$/
-		},
-		errorMessages = {
-			alpha 					: "{field} accepts only alphabetical characters",
-			alpha_numeric 			: "{field} accepts only alpha-numeric characters",
-			alpha_dash				: "{field} accepts only alpha-numeric characters, underscores, and dashes",
-			alpha_space 			: "{field} accepts only alphabetical characters and spaces",
-			alpha_numeric_space		: "{field} accepts only alpha-numeric characters and spaces",
-			alpha_dash_space		: "{field} accepts only alpha-numeric characters, underscores, dashes and spaces",
-			numeric 				: "{field} accepts only numbers (integer or decimal, positve or negative)",
-			integer 				: "{field} accepts only numbers (Integer, positive or negative)",
-			decimal 				: "{field} accepts only numbers (Decimal, positive or negative. e.g. 10.55)",
-			natural 				: "{field} accepts only digits",
-			natural_no_zero 		: "{field} accepts only digits and must be greater than zero",
-			email 					: "{field} must contain a valid email address",
-			ip_address 				: "{field} must contain a valid IP address",
-			base64 					: "{field} must contain a base64 string",
-			url 					: "{field} must contain a valid url",
-			date 					: "{field} must contain a valid date. Format: {format}",
-			time 					: "{field} must contain a valid time. Format: hh:mm:ss",
-			password 				: "The password must be at least 6 characters long and contain at least 1 Uppercase, 1 lowercase, 1 digit and a special character: ($, @,!,%, *,?, &)",
-			credit_card 			: "Incorrect number. Accepted cards: Visa, MasterCard, American Express, Diners Club, Discover and JCB",
-			is_nan					: "{field} must be a number.",
-			required 				: "{field} is required.",
-			requiredCheckbox		: "{field} is required. One of the checkboxes must be checked.",
-			requiredRadio			: "{field} is required. Select an option.",
-			min_length				: "{field} requires a minimum of {min} characters",
-			max_length				: "{field} requires a maximum of {max} characters",
-			exact_length			: "{field} requires exactly {exact} characters",
-			range_length			: "{field} requires between {min} and {max} characters",
-			greater_than			: "{field} requires a value greater than {number}",
-			greater_than_equal_to	: "{field} requires a value greater than or equal to {number}",
-			less_than				: "{field} requires a value less than {number}",
-			less_than_equal_to		: "{field} requires a value less than or equal to {number}",
-			in_list					: "{field} accepts only '{values}' values",
-			equal_to				: "{field} must be identical to the {target} field",
-			different_from			: "{field} must be different from the {target} field"
 		};	
 
 	/**
@@ -88,7 +52,43 @@
 		this.successes = [],
 		this.fields = [],
 		this.field = {},
-		this.userOptions = {};
+		this.userOptions = {},
+		this.errorMessages = {
+				alpha 					: "{field} accepts only alphabetical characters",
+				alpha_numeric 			: "{field} accepts only alpha-numeric characters",
+				alpha_dash				: "{field} accepts only alpha-numeric characters, underscores, and dashes",
+				alpha_space 			: "{field} accepts only alphabetical characters and spaces",
+				alpha_numeric_space		: "{field} accepts only alpha-numeric characters and spaces",
+				alpha_dash_space		: "{field} accepts only alpha-numeric characters, underscores, dashes and spaces",
+				numeric 				: "{field} accepts only numbers (integer or decimal, positve or negative)",
+				integer 				: "{field} accepts only numbers (Integer, positive or negative)",
+				decimal 				: "{field} accepts only numbers (Decimal, positive or negative. e.g. 10.55)",
+				natural 				: "{field} accepts only digits",
+				natural_no_zero 		: "{field} accepts only digits and must be greater than zero",
+				email 					: "{field} must contain a valid email address",
+				ip_address 				: "{field} must contain a valid IP address",
+				base64 					: "{field} must contain a base64 string",
+				url 					: "{field} must contain a valid url",
+				date 					: "{field} must contain a valid date. Format: {format}",
+				time 					: "{field} must contain a valid time. Format: hh:mm:ss",
+				password 				: "The password must be at least 6 characters long and contain at least 1 Uppercase, 1 lowercase, 1 digit and a special character: ($, @,!,%, *,?, &)",
+				credit_card 			: "Incorrect number. Accepted cards: Visa, MasterCard, American Express, Diners Club, Discover and JCB",
+				is_nan					: "{field} must be a number.",
+				required 				: "{field} is required.",
+				requiredCheckbox		: "{field} is required. One of the checkboxes must be checked.",
+				requiredRadio			: "{field} is required. Select an option.",
+				min_length				: "{field} requires a minimum of {min} characters",
+				max_length				: "{field} requires a maximum of {max} characters",
+				exact_length			: "{field} requires exactly {exact} characters",
+				range_length			: "{field} requires between {min} and {max} characters",
+				greater_than			: "{field} requires a value greater than {number}",
+				greater_than_equal_to	: "{field} requires a value greater than or equal to {number}",
+				less_than				: "{field} requires a value less than {number}",
+				less_than_equal_to		: "{field} requires a value less than or equal to {number}",
+				in_list					: "{field} accepts only '{values}' values",
+				equal_to				: "{field} must be identical to the {target} field",
+				different_from			: "{field} must be different from the {target} field"
+			};
 
 		var defaults = {
 				formId: null,
@@ -235,7 +235,7 @@
 		if(this.userOptions.jsonLangFile !== null){
 			this._loadJSONLangFile(this.userOptions.jsonLangFile, function(response){
 				
-				errorMessages = JSON.parse(response);
+				this_.errorMessages = JSON.parse(response);
 				
 				for(var i = 0, length = this_.form.length; i < length; i++){
 					this_._addEvent(this_.form[i]);
@@ -614,7 +614,7 @@
 					if( ! dateRegEx.test(element.value) && element.value.trim() != '' ){
 						error = {
 							elementId : element.id,
-							message : errorMessages.date.formatError({field: element.dataset.labelName, format: dateFormat})
+							message : this.errorMessages.date.formatError({field: element.dataset.labelName, format: dateFormat})
 						};
 						break;
 					}
@@ -624,7 +624,7 @@
 					if(element.value.trim().length < parseInt(param.removeSpaces()) && element.value.trim() != ''){
 						error = {
 							elementId : element.id,
-							message : errorMessages.min_length.formatError({field: element.dataset.labelName, min: param.removeSpaces()})
+							message : this.errorMessages.min_length.formatError({field: element.dataset.labelName, min: param.removeSpaces()})
 						};
 						break;
 					}
@@ -634,7 +634,7 @@
 					if(element.value.trim().length > parseInt(param.removeSpaces()) && element.value.trim() != ''){
 						error = {
 							elementId : element.id,
-							message : errorMessages.max_length.formatError({field: element.dataset.labelName, max: param.removeSpaces()})
+							message : this.errorMessages.max_length.formatError({field: element.dataset.labelName, max: param.removeSpaces()})
 						};
 						break;
 					}
@@ -644,7 +644,7 @@
 					if((element.value.trim().length < parseInt(param[0].removeSpaces()) || element.value.trim().length > parseInt(param[1].removeSpaces())) && element.value.trim() != ''){
 						error = {
 							elementId : element.id,
-							message : errorMessages.range_length.formatError({field: element.dataset.labelName, min: param[0], max: param[1]})
+							message : this.errorMessages.range_length.formatError({field: element.dataset.labelName, min: param[0], max: param[1]})
 						};
 						break;
 					}
@@ -654,7 +654,7 @@
 					if(element.value.trim().length != parseInt(param.removeSpaces()) && element.value.trim() != ''){
 						error = {
 							elementId : element.id,
-							message : errorMessages.exact_length.formatError({field: element.dataset.labelName, exact: param.removeSpaces()})
+							message : this.errorMessages.exact_length.formatError({field: element.dataset.labelName, exact: param.removeSpaces()})
 						};
 						break;
 					}
@@ -666,14 +666,14 @@
 							if(parseFloat(element.value.trim()) <= param.removeSpaces()){
 								error = {
 									elementId : element.id,
-									message : errorMessages.greater_than.formatError({field: element.dataset.labelName, number: param.removeSpaces()})
+									message : this.errorMessages.greater_than.formatError({field: element.dataset.labelName, number: param.removeSpaces()})
 								};
 								break;
 							}
 						} else {
 							error = {
 								elementId : element.id,
-								message : errorMessages.is_nan.formatError({field: element.dataset.labelName})
+								message : this.errorMessages.is_nan.formatError({field: element.dataset.labelName})
 							};
 							break;
 						}
@@ -686,14 +686,14 @@
 							if(parseFloat(element.value.trim()) < param.removeSpaces()){
 								error = {
 									elementId : element.id,
-									message : errorMessages.greater_than_equal_to.formatError({field: element.dataset.labelName, number: param.removeSpaces()})
+									message : this.errorMessages.greater_than_equal_to.formatError({field: element.dataset.labelName, number: param.removeSpaces()})
 								};
 								break;
 							}
 						} else {
 							error = {
 								elementId : element.id,
-								message : errorMessages.is_nan.formatError({field: element.dataset.labelName})
+								message : this.errorMessages.is_nan.formatError({field: element.dataset.labelName})
 							};
 							break;
 						}
@@ -706,14 +706,14 @@
 							if(parseFloat(element.value.trim()) >= param.removeSpaces()){
 								error = {
 									elementId : element.id,
-									message : errorMessages.less_than.formatError({field: element.dataset.labelName, number: param.removeSpaces()})
+									message : this.errorMessages.less_than.formatError({field: element.dataset.labelName, number: param.removeSpaces()})
 								};
 								break;
 							}
 						} else {
 							error = {
 								elementId : element.id,
-								message : errorMessages.is_nan.formatError({field: element.dataset.labelName})
+								message : this.errorMessages.is_nan.formatError({field: element.dataset.labelName})
 							};
 							break;
 						}
@@ -726,14 +726,14 @@
 							if(parseFloat(element.value.trim()) > param.removeSpaces()){
 								error = {
 									elementId : element.id,
-									message : errorMessages.less_than_equal_to.formatError({field: element.dataset.labelName, number: param.removeSpaces()})
+									message : this.errorMessages.less_than_equal_to.formatError({field: element.dataset.labelName, number: param.removeSpaces()})
 								};
 								break;
 							}
 						} else {
 							error = {
 								elementId : element.id,
-								message : errorMessages.is_nan.formatError({field: element.dataset.labelName})
+								message : this.errorMessages.is_nan.formatError({field: element.dataset.labelName})
 							};
 							break;
 						}
@@ -754,7 +754,7 @@
 						if(!result){
 							error = {
 								elementId : element.id,
-								message : errorMessages.in_list.formatError({field: element.dataset.labelName, values: param.join()})
+								message : this.errorMessages.in_list.formatError({field: element.dataset.labelName, values: param.join()})
 							};
 							break;
 						}
@@ -765,7 +765,7 @@
 					if(document.getElementById(param[0]).value != element.value){
 						error = {
 							elementId : element.id,
-							message : errorMessages.equal_to.formatError({field: element.dataset.labelName, target: param[1]})
+							message : this.errorMessages.equal_to.formatError({field: element.dataset.labelName, target: param[1]})
 						};
 						break;
 					}
@@ -775,7 +775,7 @@
 					if(document.getElementById(param[0]).value == element.value){
 						error = {
 							elementId : element.id,
-							message : errorMessages.different_from.formatError({field: element.dataset.labelName, target: param[1]})
+							message : this.errorMessages.different_from.formatError({field: element.dataset.labelName, target: param[1]})
 						};
 						break;
 					}
@@ -786,7 +786,7 @@
 						if(element.checked !== true){
 							error = {
 								elementId : element.id,
-								message : errorMessages.required.formatError({field: element.dataset.labelName})
+								message : this.errorMessages.required.formatError({field: element.dataset.labelName})
 							};
 							break;
 						}						
@@ -795,7 +795,7 @@
 						{
 							error = {
 								elementId : element.id,
-								message : errorMessages.required.formatError({field: element.dataset.labelName})
+								message : this.errorMessages.required.formatError({field: element.dataset.labelName})
 							};
 							break;
 						}
@@ -828,13 +828,13 @@
 								if(firstElement.type == 'checkbox'){
 									error = {
 										elementId : firstElement.id,
-										message : errorMessages.requiredCheckbox.formatError({field: firstElement.dataset.labelName})
+										message : this.errorMessages.requiredCheckbox.formatError({field: firstElement.dataset.labelName})
 									};
 									break;
 								} else {
 									error = {
 										elementId : firstElement.id,
-										message : errorMessages.requiredRadio.formatError({field: firstElement.dataset.labelName})
+										message : this.errorMessages.requiredRadio.formatError({field: firstElement.dataset.labelName})
 									};
 									break;
 								}
@@ -848,13 +848,13 @@
 						if(rule != 'password' && rule != 'credit_card'){
 							error = {
 								elementId : element.id,
-								message : errorMessages[rule].formatError({field: element.dataset.labelName})
+								message : this.errorMessages[rule].formatError({field: element.dataset.labelName})
 							};
 							break;
 						} else {
 							error = {
 								elementId : element.id,
-								message : errorMessages[rule]
+								message : this.errorMessages[rule]
 							};
 							break;
 						}
